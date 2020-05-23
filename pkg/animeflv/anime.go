@@ -83,6 +83,26 @@ func GetAnime(sourceURL string) (*Anime, error) {
 	return anime, nil
 }
 
+// GetAllCurrentlyAiringShows returns a list of all the anime shows
+// that has been airing in current season.
+func GetAllCurrentlyAiringShows() ([]*Anime, error) {
+	sources, err := GetSources()
+	if err != nil {
+		return nil, err
+	}
+
+	var animes []*Anime
+	for _, source := range sources {
+		anime, err := GetAnime(source)
+		if err != nil {
+			return nil, err
+		}
+		animes = append(animes, anime)
+	}
+
+	return animes, nil
+}
+
 func getNextReleaseDateFromString(contentScript string) (*time.Time, error) {
 	re := regexp.MustCompile(`[0-9]{4}-[0-9]{2}-[0-9]{2}`)
 	results := re.FindAllString(contentScript, 1)
