@@ -1,3 +1,15 @@
-// Package animeflv is used for extracting information
-// and returning data related to anime tv shows.
 package animeflv
+
+const hostname = "https://animeflv.net"
+
+// List of xpath used to extract anime information.
+const (
+	endpointXpath      = "//ul[@class='ListSdbr']//li//a"
+	titleXpath         = "//h2"
+	typeXpath          = "//span[contains(@class,'Type')]"
+	coverXpath         = "//div[@class='AnimeCover']//figure//img/@src"
+	statusXpath        = "//p[@class='AnmStts']/span/text()"
+	synopsisXpath      = "//div[@class='Description']/p/text()"
+	genresXpath        = "//nav[@class='Nvgnrs']//a"
+	scriptContentXpath = "/html/body/script[12]"
+)
