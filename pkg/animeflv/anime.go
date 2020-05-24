@@ -85,19 +85,19 @@ func GetAnime(sourceURL string) (*Anime, error) {
 
 // GetAllCurrentlyAiringShows returns a list of all the anime shows
 // that has been airing in current season.
-func GetAllCurrentlyAiringShows() ([]*Anime, error) {
+func GetAllCurrentlyAiringShows() ([]Anime, error) {
 	sources, err := GetSources()
 	if err != nil {
 		return nil, err
 	}
 
-	var animes []*Anime
+	var animes []Anime
 	for _, source := range sources {
 		anime, err := GetAnime(source)
 		if err != nil {
 			return nil, err
 		}
-		animes = append(animes, anime)
+		animes = append(animes, *anime)
 	}
 
 	return animes, nil
