@@ -2,6 +2,7 @@ package animeflv
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 	"strconv"
 	"time"
@@ -66,7 +67,7 @@ func GetAnime(sourceURL string) (*Anime, error) {
 	anime := &Anime{}
 	anime.Title = htmlquery.InnerText(titleNode)
 	anime.Type = htmlquery.InnerText(typeNode)
-	anime.Cover = htmlquery.InnerText(coverNode)
+	anime.Cover = fmt.Sprintf("%s%s", hostname, htmlquery.InnerText(coverNode))
 	anime.Status = htmlquery.InnerText(statusNode)
 	for _, genre := range genresNodes {
 		anime.Genres = append(anime.Genres, htmlquery.InnerText(genre))
